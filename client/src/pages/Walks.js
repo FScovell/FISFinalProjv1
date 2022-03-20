@@ -2,7 +2,7 @@ import Dashboard from './Dashboard'
 import Login from './Login'
 import NavBar from '../components/NavBar'
 
-export default function Home({user, handleSetUser, handleLogout}) {
+export default function walks({user, handleLogout, handleSetUser}) {
     if (user && user.name === "Unauthorized"){
         return (
             <>
@@ -13,7 +13,7 @@ export default function Home({user, handleSetUser, handleLogout}) {
         return(
             <>
                 <NavBar user={user} handleLogout={handleLogout}/>
-                <Dashboard user={user} handleLogout={handleLogout}/>
+                {/* <Dashboard user={user} handleLogout={handleLogout}/> */}
 
             </>
         )

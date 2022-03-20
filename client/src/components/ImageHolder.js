@@ -8,21 +8,56 @@ import Typography from '@mui/material/Typography';
 
 export default function ImageHolder(){
     const [apiData, setApiData] = useState("")
+    const [wikiNonsense, setWikiNonsense] = useState()
     useEffect(() => {
-        fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/197095')
+        fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/466569')
         .then(r => r.json())
         .then(data => setApiData(data))
         // .then(data => console.log(data))
     },[])
 
+    function testFetch(){
+      if(apiData.artistWikidata_URL){
+      const str = apiData.artistWikidata_URL
+      const end = str.slice(30)
+      // const start = str.slice(0, 26)
+         const ENDRESULT = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids=${end}&props=descriptions&languages=en&languagefallback=1&sitefilter=azwiki&formatversion=2`
+      // const ENDRESULT = `https://www.wikidata.org/w/api.php?action=query&format=json&prop=entityterms&titles=${end}`
+          // console.log(apiData)
+          fetch(ENDRESULT)
+          .then(r => r.json())
+          .then(data => 
+            // setWikiNonsense(Object.keys(data.query.pages))
+            console.log(data)
+            // setWikiNonsense(data)
+          )
+        }else{
+          console.log("The artist is unknown!")
+        }
+    }
+    useEffect(() => {
+      if(wikiNonsense){     
+        // console.log(apiData.artistWikidata_URL)
+        const str = apiData.artistWikidata_URL
+        const end = str.slice(30)
+        console.log(wikiNonsense.entities[end].descriptions.en.value)
+        // const ENDRESULT = `https://www.wikidata.org/w/api.php?action=query&format=json&prop=entityterms&titles=${end}`
+        // const NUMBER = wikiNonsense[0]
+        // fetch(ENDRESULT)
+        // .then(r => r.json())
+        // .then(data => console.log(data.query.pages[NUMBER].entityterms.description[0]))
+
+      }
+    }, [wikiNonsense])
+  
     if(apiData){
-        console.log(apiData)
+      // console.log(apiData)
         return (
             <Card sx={{ maxWidth: 445 }}>
               <CardMedia
                 component="img"
                 alt="green iguana"
-                height="140"
+                height="445"
                 image={apiData.primaryImage}
               />
               <CardContent>
@@ -41,8 +76,8 @@ export default function ImageHolder(){
               </CardContent>
               <CardActions>
                 <Button size="small">Add Comment</Button>
-                <Button size="small">
-                    Learn More 
+                <Button onClick={testFetch} size="small">
+                    About the artist
                     {/* {apiData.artistWikidata_URL} */}
                 </Button>
               </CardActions>

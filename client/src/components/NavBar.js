@@ -55,7 +55,6 @@ export default function ButtonAppBar({user, handleLogout}) {
         </Toolbar>
       </AppBar>
     </Box>
-    <Dashboard user={user} handleLogout={handleLogout}/>
     </>
   );
 }
