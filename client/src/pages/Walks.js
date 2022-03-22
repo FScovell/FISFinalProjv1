@@ -1,6 +1,7 @@
 import Dashboard from './Dashboard'
 import Login from './Login'
 import NavBar from '../components/NavBar'
+import IndividualWalk from '../components/IndividualWalk'
 
 export default function walks({user, handleLogout, handleSetUser}) {
     if (user && user.name === "Unauthorized"){
@@ -13,6 +14,7 @@ export default function walks({user, handleLogout, handleSetUser}) {
         return(
             <>
                 <NavBar user={user} handleLogout={handleLogout}/>
+                <IndividualWalk user={user} handleLogout={handleLogout}/>
                 {/* <Dashboard user={user} handleLogout={handleLogout}/> */}
 
             </>

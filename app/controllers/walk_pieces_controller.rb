@@ -1,0 +1,2 @@
+class WalkPiecesController < ApplicationController
+end

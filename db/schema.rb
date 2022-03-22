@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_17_202135) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_21_185004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_17_202135) do
     t.bigint "museum_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "wiki_data"
     t.index ["museum_id"], name: "index_pieces_on_museum_id"
   end
 
@@ -48,6 +49,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_17_202135) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "walk_pieces", force: :cascade do |t|
+    t.bigint "walk_id", null: false
+    t.bigint "piece_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["piece_id"], name: "index_walk_pieces_on_piece_id"
+    t.index ["walk_id"], name: "index_walk_pieces_on_walk_id"
+  end
+
   create_table "walks", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -60,6 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_17_202135) do
   end
 
   add_foreign_key "pieces", "museums"
+  add_foreign_key "walk_pieces", "pieces"
+  add_foreign_key "walk_pieces", "walks"
   add_foreign_key "walks", "museums"
   add_foreign_key "walks", "users"
 end

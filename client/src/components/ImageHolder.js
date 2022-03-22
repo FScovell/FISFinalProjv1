@@ -10,7 +10,8 @@ export default function ImageHolder(){
     const [apiData, setApiData] = useState("")
     const [wikiNonsense, setWikiNonsense] = useState()
     useEffect(() => {
-        fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/466569')
+      // 16517 is an example of the bug
+        fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/197095')
         .then(r => r.json())
         .then(data => setApiData(data))
         // .then(data => console.log(data))
@@ -28,15 +29,16 @@ export default function ImageHolder(){
           .then(r => r.json())
           .then(data => 
             // setWikiNonsense(Object.keys(data.query.pages))
-            console.log(data)
-            // setWikiNonsense(data)
+            // console.log(data)
+            setWikiNonsense(data)
           )
         }else{
           console.log("The artist is unknown!")
+          // console.log(apiData)
         }
     }
     useEffect(() => {
-      if(wikiNonsense){     
+      if(wikiNonsense){
         // console.log(apiData.artistWikidata_URL)
         const str = apiData.artistWikidata_URL
         const end = str.slice(30)
@@ -68,10 +70,10 @@ export default function ImageHolder(){
                     Artist: {apiData.artistDisplayName}
                 </Typography>
                 <Typography noWrap variant="body2" color="text.secondary">
-                    Dated: {apiData.objectDate}
+                    Dated: {apiData.objectBeginDate ? apiData.objectBeginDate : "unknown"}
                 </Typography>
                 <Typography noWrap variant="body2" color="text.secondary">
-                    Gallery number: {apiData.GalleryNumber}
+                    Gallery number: {apiData.GalleryNumber ? apiData.GalleryNumber : "unknown"}
                 </Typography>
               </CardContent>
               <CardActions>
