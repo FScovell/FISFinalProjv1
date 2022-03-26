@@ -9,8 +9,8 @@ import Typography from '@mui/material/Typography';
 export default function ImageHolder({walkPiece}){
     const [apiData, setApiData] = useState(walkPiece.walkPiece)
     const [wikiNonsense, setWikiNonsense] = useState()
-    const [walkId, setWalkId] = useState(1)
-    const SPECIFICWALK = `http://127.0.0.1:3000/specificWalk?id=${walkId}`
+    // const [walkId, setWalkId] = useState(1)
+    // const SPECIFICWALK = `http://127.0.0.1:3000/specificWalk?id=${walkId}`
     // useEffect(() => {
     //   // 16517 is an example of the bug
     //   // const config= {

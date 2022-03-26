@@ -4,10 +4,13 @@ import TextField from '@mui/material/TextField';
 import Grid from '@material-ui/core/Grid';
 
 export default function PieceForm(){
-    const [pieceID, setPieceID] = useState(0)
+    const [newObjID, setNewObjID] = useState(437133)
+    const ADDPIECE = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${newObjID}`
     function uploader(e){
-        setPieceID(e.target.value)
-        console.log(e.target.value)
+        setNewObjID(e.target.value)
+        fetch(ADDPIECE)
+        .then(r => r.json())
+        .then(data => console.log(data))
     }
     return (
               <Grid 
@@ -29,7 +32,7 @@ export default function PieceForm(){
                     maxWidth: '100%'
                      }}
                     >
-                        <TextField value={pieceID} onChange={uploader}/>
+                        <TextField value={newObjID} onChange={uploader}/>
                     </Box>
 
 
