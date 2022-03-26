@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     fetch('/me')
-    .then(res => res.json())
+    .then(r => r.json())
     // .then(console.log)
     .then(setUser)
   }, [])

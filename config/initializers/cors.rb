@@ -8,7 +8,6 @@
 # Rails.application.config.middleware.insert_before 0, Rack::Cors do
 #   allow do
 #     origins "*"
-#     Access-Control-Allow-Origin https://www.wikidata.org
 #     resource "*",
 #       headers: :any,
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]

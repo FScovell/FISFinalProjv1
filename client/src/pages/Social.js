@@ -2,7 +2,7 @@ import Dashboard from './Dashboard'
 import Login from './Login'
 import NavBar from '../components/NavBar'
 
-export default function social({user, handleLogout, handleSetUser}) {
+export default function Social({user, handleLogout, handleSetUser}) {
     if (user && user.name === "Unauthorized"){
         return (
             <>

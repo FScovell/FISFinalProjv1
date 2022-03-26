@@ -6,20 +6,29 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function ImageHolder(){
-    const [apiData, setApiData] = useState("")
+export default function ImageHolder({walkPiece}){
+    const [apiData, setApiData] = useState(walkPiece.walkPiece)
     const [wikiNonsense, setWikiNonsense] = useState()
-    useEffect(() => {
-      // 16517 is an example of the bug
-        fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/197095')
-        .then(r => r.json())
-        .then(data => setApiData(data))
-        // .then(data => console.log(data))
-    },[])
+    const [walkId, setWalkId] = useState(1)
+    const SPECIFICWALK = `http://127.0.0.1:3000/specificWalk?id=${walkId}`
+    // useEffect(() => {
+    //   // 16517 is an example of the bug
+    //   // const config= {
+    //   //   headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
+    //   //   method: "GET",
+    //   // }
+    //     fetch(
+    //       SPECIFICWALK, 
+    //       // config
+    //       )
+    //     .then(r => r.json())
+    //     .then(data => setApiData(data[0]))
+    //     // .then(data => console.log(data[0]))
+    // },[])
 
     function testFetch(){
-      if(apiData.artistWikidata_URL){
-      const str = apiData.artistWikidata_URL
+      if(apiData.wiki_data){
+      const str = apiData.wiki_data
       const end = str.slice(30)
       // const start = str.slice(0, 26)
          const ENDRESULT = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids=${end}&props=descriptions&languages=en&languagefallback=1&sitefilter=azwiki&formatversion=2`
@@ -40,7 +49,7 @@ export default function ImageHolder(){
     useEffect(() => {
       if(wikiNonsense){
         // console.log(apiData.artistWikidata_URL)
-        const str = apiData.artistWikidata_URL
+        const str = apiData.wiki_data
         const end = str.slice(30)
         console.log(wikiNonsense.entities[end].descriptions.en.value)
         // const ENDRESULT = `https://www.wikidata.org/w/api.php?action=query&format=json&prop=entityterms&titles=${end}`
@@ -60,21 +69,21 @@ export default function ImageHolder(){
                 component="img"
                 alt="green iguana"
                 height="445"
-                image={apiData.primaryImage}
+                image={apiData.primary_image}
               />
               <CardContent>
                 <Typography gutterBottom variant="h7" component="div">
                   {apiData.title}
                 </Typography>
                 <Typography noWrap variant="body2" color="text.secondary">
-                    Artist: {apiData.artistDisplayName}
+                    Artist: {apiData.artist_name}
                 </Typography>
                 <Typography noWrap variant="body2" color="text.secondary">
-                    Dated: {apiData.objectBeginDate ? apiData.objectBeginDate : "unknown"}
+                    Dated: {apiData.piece_date ? apiData.piece_date : "unknown"}
                 </Typography>
-                <Typography noWrap variant="body2" color="text.secondary">
+                {/* <Typography noWrap variant="body2" color="text.secondary">
                     Gallery number: {apiData.GalleryNumber ? apiData.GalleryNumber : "unknown"}
-                </Typography>
+                </Typography> */}
               </CardContent>
               <CardActions>
                 <Button size="small">Add Comment</Button>
