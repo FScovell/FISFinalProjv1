@@ -7,8 +7,8 @@ import { useState, useEffect} from 'react'
 
 
 export default function Walks({user, handleLogout, handleSetUser}) {
-    const [formState, setFormState] = useState(false)
     const [walksInfo, setWalksInfo] = useState()
+    const [formTab, setFormTab] = useState(false)
     useEffect(() => {
         fetch('/allWalks')
         .then (r => r.json())
@@ -22,12 +22,19 @@ export default function Walks({user, handleLogout, handleSetUser}) {
             </>
         )
     }else if(user && user.name !== "Unauthorized"){
+        if(formTab === true){
+            return(
+                <>
+                    <NavBar user={user} handleLogout={handleLogout}/>
+                    {walksInfo && walksInfo.map(walk => <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>)}
+                </>
+            )
+        }
         return(
             <>
                 <NavBar user={user} handleLogout={handleLogout}/>
-                {walksInfo && walksInfo.map(walk => <IndividualWalk walk={walk} user={user} handleLogout={handleLogout}/>)}
-                <WalkForm/>
-                {/* <Dashboard user={user} handleLogout={handleLogout}/> */}
+                {walksInfo && walksInfo.map(walk => <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>)}
+                <WalkForm user={user}/>
             </>
         )
 

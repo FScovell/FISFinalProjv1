@@ -67,7 +67,7 @@ export default function ImageHolder({walkPiece}){
             <Card sx={{ maxWidth: 445 }}>
               <CardMedia
                 component="img"
-                alt="green iguana"
+                alt="This is most likely not in the public domain!"
                 height="445"
                 image={apiData.primary_image}
               />

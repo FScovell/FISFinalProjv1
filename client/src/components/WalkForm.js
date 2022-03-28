@@ -3,12 +3,30 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Grid from '@material-ui/core/Grid';
 
-export default function WalkForm(){
-    const [walkID, setWalkID] = useState(0)
+export default function WalkForm({user}){
+    const [walkName, setWalkName] = useState("Walk name")
+    const [walkInfo, setWalkInfo] = useState({
+        name: "",
+        description: "",
+        museum_id: 1,
+        user_id: user.id
+    })
     function uploader(e){
-        setWalkID(e.target.value)
-        console.log(e.target.value)
+        setWalkInfo({...walkInfo, [e.target.name]: e.target.value})
     }
+
+    function submitter(){
+        const config = {
+            headers: {"Content-Type": "application/json"},
+            method: "POST",
+            body: JSON.stringify(walkInfo)
+        }
+
+        fetch('/newWalk', config)
+        .then (r => r.json())
+        .then(data => console.log(data))
+    }
+
     return (
               <Grid 
               container spacing={3}
@@ -28,10 +46,11 @@ export default function WalkForm(){
                     maxWidth: '100%'
                      }}
                     >
-                        <TextField value={walkID} onChange={uploader}/>
-                        <TextField value={walkID} onChange={uploader}/>
-                        <TextField value={walkID} onChange={uploader}/>
+                        <TextField placeholder="name" name="name" value={walkInfo.name} onChange={uploader}/>
+                        <TextField placeholder="description" name="description" value={walkInfo.description} onChange={uploader}/>
+                        <TextField value={walkInfo.museum_id}/>
                     </Box>
+                    <button onClick={submitter} >Submit</button>
                 </Grid>
             </Grid>
       );
