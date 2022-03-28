@@ -13,6 +13,7 @@ export default function IndividualWalk({setFormTab, formTab, walk, user, handleL
                 <>
                     <h1 onClick={walkClickTester} align="center">{walk.name}</h1>
                     <Dashboard walk={walk} user={user} handleLogout={handleLogout}/>
+                    <h1 align="center">Description: {walk.description}</h1>
                 </>
             )
         }else{

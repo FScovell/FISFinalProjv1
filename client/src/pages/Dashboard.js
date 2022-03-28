@@ -6,7 +6,7 @@ export default function Dashboard({walk, user, handleLogout}) {
         <div>
             {/* <ImageHolder/> */}
             <Gridtest walk={walk}/>
-            <PieceForm/>
+            <PieceForm walk={walk}/>
         </div>
     )
 } 

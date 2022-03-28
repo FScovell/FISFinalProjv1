@@ -86,7 +86,7 @@ export default function ImageHolder({walkPiece}){
                 </Typography> */}
               </CardContent>
               <CardActions>
-                <Button size="small">Add Comment</Button>
+                <Button size="small">Remove From Walk</Button>
                 <Button onClick={testFetch} size="small">
                     About the artist
                     {/* {apiData.artistWikidata_URL} */}

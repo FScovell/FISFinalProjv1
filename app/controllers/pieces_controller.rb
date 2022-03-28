@@ -21,6 +21,6 @@ class PiecesController < ApplicationController
     end
 
     def piece_params
-        params.permit(:piece_api_id, :title, :primary_image, :artist_name, :piece_date, :museum_id)
+        params.permit(:piece_api_id, :title, :primary_image, :artist_name, :piece_date, :museum_id, :wiki_data)
     end
 end

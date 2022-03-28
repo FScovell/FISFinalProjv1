@@ -3,9 +3,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Grid from '@material-ui/core/Grid';
 
-export default function PieceForm(){
+export default function PieceForm({walk}){
     const [newObjID, setNewObjID] = useState(437133)
     const [museumID, setMuseumID] = useState(1)
+    const [duplicateCheck, setDuplicateCheck] = useState()
+    const [duplicate, setDuplicate] = useState()
+    const [walkStopCreate, setWalkStopCreate] = useState()
 
     const [piecePost, setPiecePost] = useState({
         piece_api_id: newObjID,
@@ -15,24 +18,25 @@ export default function PieceForm(){
         piece_date: "piece date",
         wiki_data: "wiki data"
     })
+    
     const [createdObj, setCreatedObj] = useState(piecePost)
+    function updater(e){
+        setNewObjID(e.target.value)
+    }
     const ADDPIECE = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${newObjID}`
     function uploader(){
         fetch(ADDPIECE)
         .then(r => r.json())
-        // .then(data => console.log(data))
+        // .then(data => console.log(data.artistWikidata_URL))
         .then(data => setPiecePost({
             piece_api_id: newObjID,
             title: data.title,
             primary_image: data.primaryImage,
             artist_name: data.artistDisplayName, 
             piece_date: data.objectBeginDate,
-            wiki_data: data.objectWikidata_URL,
-            museum_id: museumID
+            museum_id: museumID,
+            wiki_data: data.artistWikidata_URL
         }))
-    }
-    function updater(e){
-        setNewObjID(e.target.value)
     }
     useEffect(() => {
         if(piecePost.title !== "title"){
@@ -44,18 +48,51 @@ export default function PieceForm(){
             }
             fetch("/newPiece", config)
             .then(r => r.json())
+            // .then(data => console.log(data))
             .then(data => setCreatedObj(data))
         }
     },[piecePost])
 
     useEffect(() => {
         if(createdObj.title !== "title"){
-            console.log(piecePost.title)
+            // console.log(piecePost.title)
             fetch("/allPieces")
             .then(r => r.json())
-            .then(data => data.map((piece)=> console.log(piece.title)))
+            .then(data => setDuplicateCheck(data))
         }
     },[createdObj])
+
+    useEffect(() => {
+        {duplicateCheck && duplicateCheck.map(item => {
+            if(item.title === piecePost.title) {
+                setDuplicate(item.id)
+            }
+        })}
+    },[duplicateCheck])
+
+    useEffect(() => {
+        if(duplicate){
+            setWalkStopCreate({
+                walk_id: walk.id,
+                piece_id: duplicate
+            })
+        }
+    },[duplicate])
+
+    useEffect(() => {
+        if(walkStopCreate){
+            console.log(walkStopCreate)
+            const config = {
+                headers: {"Content-Type": "application/json"},
+                method: "POST",
+                body: JSON.stringify(walkStopCreate)
+            }
+            fetch("/newWalkPiece", config)
+            .then(r => r.json())
+            .then(data => console.log(data))
+            window.location.reload()
+        }
+    },[walkStopCreate])
 
     return (
               <Grid 
