@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
 export default function NestedGrid({walk}) {
   const classes = useStyles();
 
-  function FormRow(walkPiece) {
+  function FormRow(walkPiece, walk) {
     return (
       <React.Fragment>
         <Grid item xs={2}>
-          <ImageHolder walkPiece={walkPiece}/>
+          <ImageHolder walk={walk} walkPiece={walkPiece}/>
         </Grid>
       </React.Fragment>
     );
@@ -38,7 +38,7 @@ export default function NestedGrid({walk}) {
          alignItems="center"
          justifyContent="center"
         >
-            {walk.pieces.map(walkPiece => <FormRow walkPiece={walkPiece}/>)}
+            {walk.pieces.map(walkPiece => <FormRow walk={walk} walkPiece={walkPiece}/>)}
           
         </Grid>
       

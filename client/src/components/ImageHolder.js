@@ -6,9 +6,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function ImageHolder({walkPiece}){
+export default function ImageHolder({walk, walkPiece}){
     const [apiData, setApiData] = useState(walkPiece.walkPiece)
     const [wikiNonsense, setWikiNonsense] = useState()
+    const [toBeDeleted, setToBeDeleted] = useState(0)
     // const [walkId, setWalkId] = useState(1)
     // const SPECIFICWALK = `http://127.0.0.1:3000/specificWalk?id=${walkId}`
     // useEffect(() => {
@@ -25,6 +26,29 @@ export default function ImageHolder({walkPiece}){
     //     .then(data => setApiData(data[0]))
     //     // .then(data => console.log(data[0]))
     // },[])
+    function remover(){
+      // console.log(walkPiece.walk.id)
+      // console.log(walkPiece.walkPiece.id)
+
+      fetch("/allWalkPieces")
+      .then(r => r.json())
+      .then(data => data.map(walk => {
+        if(walk.piece.id === walkPiece.walkPiece.id && walk.walk.id === walkPiece.walk.id){
+          setToBeDeleted(walk.id)
+        }
+      }))
+
+
+    }
+    useEffect(() => {
+      if(toBeDeleted !== 0){
+        // console.log(toBeDeleted)
+        fetch(`http://127.0.0.1:3000/deleteWalkPiece?id=${toBeDeleted}`, {method: "DELETE"})
+        .then(r => r.json())
+        .then(data => console.log(data))
+        window.location.reload()
+      }
+    }, [toBeDeleted])
 
     function testFetch(){
       if(apiData.wiki_data){
@@ -86,7 +110,7 @@ export default function ImageHolder({walkPiece}){
                 </Typography> */}
               </CardContent>
               <CardActions>
-                <Button size="small">Remove From Walk</Button>
+                <Button onClick={remover} size="small">Remove From Walk</Button>
                 <Button onClick={testFetch} size="small">
                     About the artist
                     {/* {apiData.artistWikidata_URL} */}

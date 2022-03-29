@@ -12,6 +12,7 @@ export default function WalkForm({user}){
         user_id: user.id
     })
     function uploader(e){
+        e.preventDefault()
         setWalkInfo({...walkInfo, [e.target.name]: e.target.value})
     }
 
@@ -25,6 +26,7 @@ export default function WalkForm({user}){
         fetch('/newWalk', config)
         .then (r => r.json())
         .then(data => console.log(data))
+        window.location.reload()
     }
 
     return (
@@ -50,7 +52,7 @@ export default function WalkForm({user}){
                         <TextField placeholder="description" name="description" value={walkInfo.description} onChange={uploader}/>
                         <TextField value={walkInfo.museum_id}/>
                     </Box>
-                    <button onClick={submitter} >Submit</button>
+                    <button onClick={() => submitter()} >Submit</button>
                 </Grid>
             </Grid>
       );

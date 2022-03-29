@@ -37,6 +37,7 @@ export default function PieceForm({walk}){
             museum_id: museumID,
             wiki_data: data.artistWikidata_URL
         }))
+        setNewObjID(437133)
     }
     useEffect(() => {
         if(piecePost.title !== "title"){

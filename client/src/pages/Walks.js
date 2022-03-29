@@ -26,14 +26,26 @@ export default function Walks({user, handleLogout, handleSetUser}) {
             return(
                 <>
                     <NavBar user={user} handleLogout={handleLogout}/>
-                    {walksInfo && walksInfo.map(walk => <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>)}
+                    {walksInfo && walksInfo.map(walk => {
+                        if(walk.user.id === user.id){
+                            return(
+                                <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>
+                            )
+                        }
+                    })}
                 </>
             )
         }
         return(
             <>
                 <NavBar user={user} handleLogout={handleLogout}/>
-                {walksInfo && walksInfo.map(walk => <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>)}
+                {walksInfo && walksInfo.map(walk =>{
+                    if(walk.user.id === user.id){
+                        return(
+                            <IndividualWalk setFormTab={setFormTab} formTab={formTab} walk={walk} user={user} handleLogout={handleLogout}/>
+                        )
+                    }
+                })}
                 <WalkForm user={user}/>
             </>
         )
