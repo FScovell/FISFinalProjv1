@@ -4,11 +4,12 @@ import TextField from '@mui/material/TextField';
 import Grid from '@material-ui/core/Grid';
 
 export default function PieceForm({walk}){
-    const [newObjID, setNewObjID] = useState(437133)
+    const [newObjID, setNewObjID] = useState(547802)
     const [museumID, setMuseumID] = useState(1)
     const [duplicateCheck, setDuplicateCheck] = useState()
     const [duplicate, setDuplicate] = useState()
     const [walkStopCreate, setWalkStopCreate] = useState()
+    const [description, setDescription] = useState({description: `${walk.description}`});
 
     const [piecePost, setPiecePost] = useState({
         piece_api_id: newObjID,
@@ -37,7 +38,7 @@ export default function PieceForm({walk}){
             museum_id: museumID,
             wiki_data: data.artistWikidata_URL
         }))
-        setNewObjID(437133)
+        setNewObjID(547802)
     }
     useEffect(() => {
         if(piecePost.title !== "title"){
@@ -82,7 +83,6 @@ export default function PieceForm({walk}){
 
     useEffect(() => {
         if(walkStopCreate){
-            console.log(walkStopCreate)
             const config = {
                 headers: {"Content-Type": "application/json"},
                 method: "POST",
@@ -95,13 +95,27 @@ export default function PieceForm({walk}){
         }
     },[walkStopCreate])
 
+    function editor(e){
+        setDescription({description: `${e.target.value}`})
+    }
+    function descriptionSubmitter(){
+        console.log(description)
+        const config= {
+            headers: {"Content-Type": "application/json"},
+            method: "PATCH",
+            body: JSON.stringify(description)
+        }
+        fetch(`http://127.0.0.1:3000/updateWalk?id=${walk.id}`, config)
+        .then(r => r.json())
+        .then(data => console.log(data))
+    }
     return (
               <Grid 
               container spacing={3}
               alignItems="center"
               justifyContent="center"
               >
-                <h1>Add a piece of art to your walk using its object ID</h1>
+                <h3>Add a piece of art to your walk using its object ID, or edit your walk's description</h3>
                 <Grid 
                 container item xs={12} 
                 spacing={3}
@@ -116,7 +130,15 @@ export default function PieceForm({walk}){
                     >
                         <TextField placeholder="Object ID" value={newObjID} onChange={updater}/>
                     </Box>
-                    <button onClick={uploader}>Submit</button>
+                    <Box
+                    sx={{
+                    maxWidth: '100%'
+                     }}
+                    >
+                        <button onClick={uploader}>Submit</button>
+                    </Box>
+                    <TextField align="center" placeholder="name" name="name" value={description.description} onChange={editor}/>
+                    <button onClick={() => descriptionSubmitter()}>Submit Edit</button>
                 </Grid>
             </Grid>
       );

@@ -31,6 +31,6 @@ class WalksController < ApplicationController
     end
 
     def walk_params
-        params.permit(:name, :description, :museum_id, :user_id)
+        params.permit(:name, :description, :museum_id, :user_id, :id)
     end
 end

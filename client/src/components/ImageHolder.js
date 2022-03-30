@@ -29,7 +29,6 @@ export default function ImageHolder({walk, walkPiece}){
     function remover(){
       // console.log(walkPiece.walk.id)
       // console.log(walkPiece.walkPiece.id)
-
       fetch("/allWalkPieces")
       .then(r => r.json())
       .then(data => data.map(walk => {
@@ -41,11 +40,10 @@ export default function ImageHolder({walk, walkPiece}){
 
     }
     useEffect(() => {
+              console.log(toBeDeleted)
       if(toBeDeleted !== 0){
-        // console.log(toBeDeleted)
+
         fetch(`http://127.0.0.1:3000/deleteWalkPiece?id=${toBeDeleted}`, {method: "DELETE"})
-        .then(r => r.json())
-        .then(data => console.log(data))
         window.location.reload()
       }
     }, [toBeDeleted])
@@ -110,7 +108,7 @@ export default function ImageHolder({walk, walkPiece}){
                 </Typography> */}
               </CardContent>
               <CardActions>
-                <Button onClick={remover} size="small">Remove From Walk</Button>
+                <Button onClick={() => remover()} size="small">Remove From Walk</Button>
                 <Button onClick={testFetch} size="small">
                     About the artist
                     {/* {apiData.artistWikidata_URL} */}
