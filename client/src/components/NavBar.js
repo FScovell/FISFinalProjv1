@@ -32,9 +32,9 @@ export default function ButtonAppBar({user, handleLogout}) {
                         <MenuItem onClick={popupState.close}>
                             <Link to="/walks">Walks</Link>
                         </MenuItem>
-                        <MenuItem onClick={popupState.close}>
+                        {/* <MenuItem onClick={popupState.close}>
                             <Link to="/social">Social</Link>
-                        </MenuItem>
+                        </MenuItem> */}
                     </Menu>
                     </React.Fragment>
                 )}

@@ -40,9 +40,8 @@ export default function ImageHolder({walk, walkPiece}){
 
     }
     useEffect(() => {
-              console.log(toBeDeleted)
+      console.log(toBeDeleted)
       if(toBeDeleted !== 0){
-
         fetch(`http://127.0.0.1:3000/deleteWalkPiece?id=${toBeDeleted}`, {method: "DELETE"})
         window.location.reload()
       }
@@ -64,7 +63,7 @@ export default function ImageHolder({walk, walkPiece}){
             setWikiNonsense(data)
           )
         }else{
-          console.log("The artist is unknown!")
+          alert("The artist is unknown!")
           // console.log(apiData)
         }
     }
@@ -73,7 +72,7 @@ export default function ImageHolder({walk, walkPiece}){
         // console.log(apiData.artistWikidata_URL)
         const str = apiData.wiki_data
         const end = str.slice(30)
-        console.log(wikiNonsense.entities[end].descriptions.en.value)
+        alert(wikiNonsense.entities[end].descriptions.en.value)
         // const ENDRESULT = `https://www.wikidata.org/w/api.php?action=query&format=json&prop=entityterms&titles=${end}`
         // const NUMBER = wikiNonsense[0]
         // fetch(ENDRESULT)

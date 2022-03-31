@@ -19,6 +19,11 @@ export default function IndividualWalk({setFormTab, formTab, walk, user, handleL
         setFormTab(!formTab)
     }
 
+    function deleteWalk(){
+        console.log(walk.id)
+        fetch(`http://127.0.0.1:3000/deleteWalk?id=${walk.id}`, {method: "DELETE"})
+        window.location.reload()
+    }
     // if(tab === true){
 
             return(
@@ -38,6 +43,7 @@ export default function IndividualWalk({setFormTab, formTab, walk, user, handleL
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Dashboard walk={walk} user={user} handleLogout={handleLogout}/>
+                                <button onClick={deleteWalk}>Delete Walk</button>
                             </AccordionDetails>
                         </Accordion>
                     </div>
