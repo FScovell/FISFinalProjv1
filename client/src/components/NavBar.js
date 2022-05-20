@@ -27,7 +27,7 @@ export default function ButtonAppBar({user, handleLogout}) {
                     </Button>
                     <Menu {...bindMenu(popupState)}>
                         <MenuItem onClick={popupState.close}>
-                            <Link to="/">Profile</Link>
+                            <Link to="/profile">Profile</Link>
                         </MenuItem>
                         <MenuItem onClick={popupState.close}>
                             <Link to="/walks">Walks</Link>

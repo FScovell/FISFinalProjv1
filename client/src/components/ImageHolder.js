@@ -42,8 +42,8 @@ export default function ImageHolder({walk, walkPiece}){
     useEffect(() => {
       console.log(toBeDeleted)
       if(toBeDeleted !== 0){
-        fetch(`http://127.0.0.1:3000/deleteWalkPiece?id=${toBeDeleted}`, {method: "DELETE"})
-        window.location.reload()
+        fetch(`/deleteWalkPiece?id=${toBeDeleted}`, {method: "DELETE"})
+        // window.location.reload()
       }
     }, [toBeDeleted])
 
@@ -55,13 +55,14 @@ export default function ImageHolder({walk, walkPiece}){
          const ENDRESULT = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids=${end}&props=descriptions&languages=en&languagefallback=1&sitefilter=azwiki&formatversion=2`
       // const ENDRESULT = `https://www.wikidata.org/w/api.php?action=query&format=json&prop=entityterms&titles=${end}`
           // console.log(apiData)
-          fetch(ENDRESULT)
-          .then(r => r.json())
-          .then(data => 
-            // setWikiNonsense(Object.keys(data.query.pages))
-            // console.log(data)
-            setWikiNonsense(data)
-          )
+          alert(ENDRESULT)
+          // fetch(ENDRESULT)
+          // .then(r => r.json())
+          // .then(data => 
+          //   // setWikiNonsense(Object.keys(data.query.pages))
+          //   // console.log(data)
+          //   setWikiNonsense(data)
+          // )
         }else{
           alert("The artist is unknown!")
           // console.log(apiData)

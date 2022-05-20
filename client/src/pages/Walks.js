@@ -53,7 +53,7 @@ export default function Walks({user, handleLogout, handleSetUser}) {
 
     }else{
         return(
-            <h1> Shouldn't be here</h1>
+            <h1> Loading... </h1>
         )
     }
 }

@@ -13,8 +13,6 @@ export default function Home({user, handleSetUser, handleLogout}) {
         return(
             <>
                 <NavBar user={user} handleLogout={handleLogout}/>
-                
-
             </>
         )
     }else{

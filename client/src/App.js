@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Walks from './pages/Walks'
-import Social from './pages/Social'
+import Profile from './pages/Profile'
 
 function App() {
   const [ user, setUser ] = useState()
@@ -31,7 +31,7 @@ function App() {
     <Router >
       <Routes>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/social" element={<Social user={user} handleSetUser={setUser} handleLogout={handleLogout}/>}/>
+        <Route path="/profile" element={<Profile user={user} handleSetUser={setUser} handleLogout={handleLogout}/>}/>
         <Route path="/walks" element={<Walks user={user} handleSetUser={setUser} handleLogout={handleLogout}/>}/>
         <Route path="/" element={<Home user={user} handleSetUser={setUser} handleLogout={handleLogout}/>}/>
       </Routes>

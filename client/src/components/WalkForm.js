@@ -50,7 +50,10 @@ export default function WalkForm({user}){
                     >
                         <TextField placeholder="name" name="name" value={walkInfo.name} onChange={uploader}/>
                         <TextField placeholder="description" name="description" value={walkInfo.description} onChange={uploader}/>
-                        <TextField value={walkInfo.museum_id}/>
+                        <TextField value={"The Met"
+                            //walkInfo.museum_id
+                        }/>
+
                     </Box>
                     <button onClick={() => submitter()} >Submit</button>
                 </Grid>
