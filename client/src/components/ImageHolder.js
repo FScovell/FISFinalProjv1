@@ -103,6 +103,7 @@ export default function ImageHolder({walk, walkPiece}){
                 <Typography noWrap variant="body2" color="text.secondary">
                     Dated: {apiData.piece_date ? apiData.piece_date : "unknown"}
                 </Typography>
+
                 {/* <Typography noWrap variant="body2" color="text.secondary">
                     Gallery number: {apiData.GalleryNumber ? apiData.GalleryNumber : "unknown"}
                 </Typography> */}

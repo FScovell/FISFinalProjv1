@@ -21,8 +21,8 @@ export default function IndividualWalk({setFormTab, formTab, walk, user, handleL
 
     function deleteWalk(){
         console.log(walk.id)
-        fetch(`http://127.0.0.1:3000/deleteWalk?id=${walk.id}`, {method: "DELETE"})
-        window.location.reload()
+        fetch(`/deleteWalk?id=${walk.id}`, {method: "DELETE"})
+        // window.location.reload()
     }
     // if(tab === true){
 

@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+pg_dump -U frede -h localhost -p 5432 postgresql -f ~/Development/code/dbdump
