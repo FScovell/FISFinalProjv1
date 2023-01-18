@@ -3,6 +3,7 @@ After this is cloned and open in VSCode, cd into "project-5"
  - Input "sudo service postgresql start"
  - Enter your sudo password
  - Input "rails s"
+ 
 I then usually open a new terminal and cd into "client"
 - Input "npm start"
 This should open your browser and send you to a blank screen with a log out option. Press logout and then sign in using the tester account.
